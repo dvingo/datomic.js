@@ -24,7 +24,7 @@ type SettingsForm = Omit<Settings, 'apiAuthHeaders'> & {
   fetchSchemaEndpoint: string
   submitQueryEndpoint: string
   translateQueryEndpoint: string
-  fetchEntityShapesEndpoint: string // Add this line
+  fetchEntityShapesEndpoint: string
 }
 
 const SettingsPage: React.FC = () => {
@@ -109,12 +109,7 @@ const SettingsPage: React.FC = () => {
         <EndpointTextField name="fetchSchemaEndpoint" control={control} label="Fetch Schema Endpoint" />
         <EndpointTextField name="submitQueryEndpoint" control={control} label="Submit Query Endpoint" />
         <EndpointTextField name="translateQueryEndpoint" control={control} label="Translate Query Endpoint" />
-        <EndpointTextField
-          name="fetchEntityShapesEndpoint"
-          control={control}
-          label="Fetch Entity Shapes Endpoint"
-        />{' '}
-        {/* Add this line */}
+        <EndpointTextField name="fetchEntityShapesEndpoint" control={control} label="Fetch Entity Shapes Endpoint" />
         <Box>
           <Typography variant="subtitle1" gutterBottom>
             API Request Headers

@@ -198,9 +198,6 @@ const evalCodeMachine = setup({
           actions: 'setResult'
         },
         ERROR: {
-          // this is causing the iframe to be destroyed and thus typing doesn't work. beacuse you're in hte ready state?
-          // i'm not sure why when there is an exception in the iframe then you cannot type in the text area anymore
-          // it looks like it's still in the evaluating state
           target: 'ready',
           actions: 'setError'
         }
@@ -217,7 +214,6 @@ export function useEvalCodeState({ apiUrl }: { apiUrl: string }) {
   const { code, result, error } = snapshot.context
   const handleCodeChange = (code: string) => send({ type: 'SET_CODE', code })
   const handleEvalCode = () => {
-    console.log('handleEvalCode state machine', apiUrl)
     send({ type: 'EVAL_CODE', apiUrl })
   }
   return { code, result, error, handleCodeChange, handleEvalCode }
