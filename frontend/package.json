@@ -1,5 +1,5 @@
 {
-  "name": "ts-datomic",
+  "name": "datomic.js",
   "private": true,
   "version": "0.0.0",
   "type": "module",
