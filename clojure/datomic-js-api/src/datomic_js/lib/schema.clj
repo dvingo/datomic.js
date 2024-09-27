@@ -4,6 +4,7 @@
    [clojure.set :as set]
    [clojure.string :as str]
    [datomic.api :as d]
+   [malli.core :as malli]
    [malli.provider]))
 
 (defn pprint-str [v] (with-out-str (pprint v)))
@@ -75,6 +76,25 @@
                    "fressian"}
                  :namespace))
    (sort-by (juxt :namespace :ident))))
+
+;; same as get-datomic-schema but leaves data in clj format
+(defn get-full-datomic-schema [db]
+  (->>
+    (all-db-entities-with-idents db)
+    (remove (comp #{"db"
+                    "db.part"
+                    "db.sys"
+                    "db.alter"
+                    "db.schema"
+                    "db.boostrap"
+                    "db.cardinality"
+                    "db.excise"
+                    "db.install"
+                    "db.type"
+                    "db.unique"
+                    "fressian"}
+              namespace :db/ident second))
+    (map second)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Malli Provider to determine entity shapes.

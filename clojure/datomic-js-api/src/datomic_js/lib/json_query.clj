@@ -1,9 +1,8 @@
-(ns ts-datomic.lib.json-query
+(ns datomic-js.lib.json-query
   "JSON query format transformation to Clojure data format.
    Support for using Datomic using only JSON to make the database available to non-Clojure clients."
   (:require
     [clojure.pprint :refer [pprint]]
-    [clojure.set :as set]
     [datomic.api :as d]
     [clojure.instant :as clj.instant]
     [clojure.string :as str]))
