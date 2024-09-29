@@ -211,7 +211,7 @@
       out)))
 
 (defn transform-in [in]
-(into ['$] (mapv symbol in)))
+  (into ['$] (mapv symbol in)))
 
 (defn transform-query [{:keys [find in where]}]
   (let [find' (transform-find find)
