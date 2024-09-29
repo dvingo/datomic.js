@@ -71,6 +71,7 @@
              :entity "?e"} "..."],
      :where [["?e" "user/id"]]}
     '{:find [[(pull ?e [:user/given-name [:user/id :as :userId] {[:user/points :as :points] [*]}]) ...]],
+      :in [$]
       :where [[?e :user/id]]}
 
     {:find ["?e" "?name"],
@@ -79,10 +80,27 @@
              [["<" {:value "2020-01-01", :type "instant"} "?time"]]
              ["?e" "user/name" "?name"]]}
     '{:find [?e ?name]
+      :in [$]
       :where [[?e :user/id _ ?tx true]
               [?tx :db/txInstant ?time]
               [(< #inst "2020-01-01" ?time)]
-              [?e :user/name ?name]]}))
+              [?e :user/name ?name]]}
+      {:find ["?e" "?name", "?street"],
+       :in ["?e" "?name"],
+       :where [["?e" "user/name" "?name"]
+               ["?e" "user/street" "?street"] ]}
+      '{:find [?e ?name ?street],
+        :in [$ ?e ?name],
+        :where [[?e :user/name ?name]
+                [?e :user/street ?street]]}))
+
+(comment (sut/transform-query
+    {:find ["?e" "?name", "?street"],
+     :in ["?e" "?name"],
+     :where [["?e" "user/name" "?name"]
+             ["?e" "user/street" "?street"]
+             ]})
+             )
 
 (deftest transform-rule-invocation-test 
   (are [in out] (= (sut/transform-rule-invocation in) out)
@@ -98,6 +116,7 @@
      :where [{:value ["user-rule" "?e" 500 "?userId"],
               :type "rule"}]}
     '{:find [?e ?name]
+      :in [$]
       :where [(user-rule ?e 500 ?userId)]}))
 
 (deftest transform-function-invocation-test

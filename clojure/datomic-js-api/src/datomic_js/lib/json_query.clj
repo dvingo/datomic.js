@@ -210,10 +210,14 @@
       [out]
       out)))
 
-(defn transform-query [{:keys [find where]}]
+(defn transform-in [in]
+(into ['$] (mapv symbol in)))
+
+(defn transform-query [{:keys [find in where]}]
   (let [find' (transform-find find)
+        in' (transform-in in)
         where' (transform-where where)]
-    {:find find' :where where'}))
+    {:find find' :in in' :where where'}))
 
 (defn transform-query-to-pprint-str [query]
   (-> query transform-query pprint-str))
