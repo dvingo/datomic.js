@@ -16,6 +16,23 @@
                                "Access-Control-Allow-Methods" "GET, POST, PUT, DELETE, OPTIONS"
                                "Access-Control-Allow-Headers" "Content-Type, Authorization"} })})
                                
+;; todo - add support for specifying different db values
+
+;; example payloads to support different db args
+;; transform-args would be aware of this
+;; you will need transform-query-with-db
+;; (transform-query db query)
+;; that way the transform can construct the proper db value and return it
+(def one
+  {:query {:find []
+           :where []}
+   :args
+   [
+    {:db {:since "2024-01-01"}}
+    {:db {:as-of "2023-01-01"}}
+    {:db "current"}
+    ]})
+
 (defn routes
   []
   [["/query"
@@ -26,8 +43,8 @@
                            db :db
                            :as req}]
                        (lib.json-query/initialize-schema-index! db)
-                       (let [query' (lib.json-query/transform-query query)
-                             result (lib.json-query/run-query db query')]
+                       (let [{:keys [args] :as query'} (lib.json-query/transform-query query)
+                             result (lib.json-query/run-query (dissoc query' :args) (into [db] args))]
                          {:status 200
                           :body {:data result}}))}}] 
    ["/translate-query"

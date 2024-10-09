@@ -213,14 +213,19 @@
 (defn transform-in [in]
   (into ['$] (mapv symbol in)))
 
+;; todo - a version that supports different db values
+(defn transform-args [args]
+  (mapv #(cond-> % (complex-value? %) parse-complex-value) args))
+
 (defn transform-query [{:keys [find in where]}]
   (let [find' (transform-find find)
         in' (transform-in in)
-        where' (transform-where where)]
-    {:find find' :in in' :where where'}))
+        where' (transform-where where)
+        args' (transform-args args)]
+    {:find find' :in in' :where where' :args args'}))
 
 (defn transform-query-to-pprint-str [query]
   (-> query transform-query pprint-str))
 
-(defn run-query [db query]
-  (d/query {:query query :args [db]}))
+(defn run-query [query args]
+  (d/query {:query query :args args}))
