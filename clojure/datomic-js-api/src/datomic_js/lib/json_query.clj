@@ -217,7 +217,7 @@
 (defn transform-args [args]
   (mapv #(cond-> % (complex-value? %) parse-complex-value) args))
 
-(defn transform-query [{:keys [find in where]}]
+(defn transform-query [{:keys [find in where args]}]
   (let [find' (transform-find find)
         in' (transform-in in)
         where' (transform-where where)
