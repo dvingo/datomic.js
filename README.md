@@ -12,6 +12,23 @@ The project is made of three parts:
 
 This is still a work in progress and is not yet feature complete.
 
+# Screenshots and Video Overview
+
+The `frontend` directory in the repo contains a query editor playground React Webapp. 
+
+## Executing queries and viewing results
+
+https://github.com/user-attachments/assets/bef00db9-6c87-406e-ade3-7f9d22548bab
+
+## Browsing the schema attributes
+
+https://github.com/user-attachments/assets/c17b25d1-d755-49b7-920c-a842a2e5a272
+
+## Viewing entity shapes and app settings
+
+https://github.com/user-attachments/assets/294a57b8-b13c-49ba-8527-1f73e87accf5
+
+
 # Development
 
 ## Prerequisites
