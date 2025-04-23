@@ -14,7 +14,16 @@ This is still a work in progress and is not yet feature complete.
 
 # Screenshots and Video Overview
 
-The `frontend` directory in the repo contains a query editor playground React Webapp. 
+The `frontend` directory in the repo contains a query editor playground React Webapp. Here are some screenshots and screen recordings of using the app:
+
+
+<img width="70%" alt="query_editor" src="https://github.com/user-attachments/assets/0e35d497-b2b3-42bb-af7c-0fb9e421064a" />
+
+<img width="70%" alt="schema_page" src="https://github.com/user-attachments/assets/fed6c8e0-fb75-4b79-aaea-c4dc6c7dfead" />
+
+<img width="70%" alt="entities_page" src="https://github.com/user-attachments/assets/49ac18e7-f489-4696-a83f-4216bc5402e0" />
+
+<img width="70%" alt="settings_page" src="https://github.com/user-attachments/assets/f97d0103-6053-40c3-ac4c-dffcc8cc8654" />
 
 ## Executing queries and viewing results
 
