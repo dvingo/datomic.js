@@ -52,7 +52,7 @@
   ((app) {:uri "/", :request-method :get, :server-port 3001, :db (d/db conn)})
 
    (.close server_)
-   (def server_ (start-server 3001))
+   (def server_ (start-server 8080))
  )
 
 (defn -main [& args]
